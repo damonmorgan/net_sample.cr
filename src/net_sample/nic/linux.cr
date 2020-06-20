@@ -33,7 +33,7 @@ class NetSample::NIC
   private def self.get_nic_info : Hash(String, self)
     nics = Hash(String, self).new { |h, k| h[k] = self.new(k) }
     if LibC.getifaddrs(out ifaddrs) == -1
-      raise Errno.new("errno #{Errno.value} on getifaddr()")
+      raise Errno.new("errno #{Errno.value} on getifaddr()", Errno.value)
     end
     ifap = ifaddrs.as(LibC::Ifaddrs*)
     while ifap
